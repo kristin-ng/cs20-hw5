@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="index.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script lang="JavaScript">
+        // create new array to store num
+        var unsort = new Array();
+        var num_unsort = 6;
+        var random, max;
+        while (unsort.length < num_unsort) {
+            // set upper limits (different for lucky ball)
+            max = (unsort.length == num_unsort - 1) ? 18 : 48;
+            random = Math.floor(Math.random() * max) + 1;
+            // if number not present, then add to array
+            if (unsort.indexOf(random) === -1) {
+                unsort.push(random);
+            }
+        }
+        // purpose: display array of lotory numbers
+        function display_num() {
+            for (i = 0; i < unsort.length; i++) {
+                document.getElementById("unsort"+(i+1)).value = unsort[i];
+            }
+        }
+        //sort num 
+        var sorted = unsort.slice(0,5);
+        var lucky = unsort[5];
+        sorted.sort(function(a,b){return a-b});
+        sorted.push(lucky);
+        // purpose: display sorted lotory numbers
+        function sort_num() {
+            for (i = 0; i < unsort.length; i++) {
+                document.getElementById("sort"+(i+1)).value = sorted[i];
+            }
+        }
+        // purpose: calculates score of player
+        // PROBLEM: NOT WORKING ( not comparing it right? )
+        function get_score() {
+            var user_five = lottery.pick_five.value;
+            var user_lucky = lottery.pick_lucky.value;
+            var user_pick = user_five.split(" ").map(function(elem) {return parseInt(elem, 10);});
+            var score = 0;
+            for (i = 0; i < unsort.length - 1; i++ ) {
+                for (j = 0; j < user_pick.length; j++ ) {
+                    if (user_pick[j] == unsort[i]){
+                        score += 1;
+                        break;
+                    }
+
+                }
+            }
+            if (user_lucky === lucky) {
+                score += 0.5;
+            }
+            if (score === 0.5 ) {
+                document.getElementById("match").value = "Match: 0 + Lucky Ball";
+                document.getElementById("payout").value = "Payout: $4";
+            }
+            else if (score === 1.5 ) {
+                document.getElementById("match").value = "Match: 1 + Lucky Ball";
+                document.getElementById("payout").value = "Payout: $6";
+            }
+
+            else if (score === 2) {
+                document.getElementById("match").value = "Match: 2";
+                document.getElementById("payout").value = "Payout: $3";
+            }
+
+            else if (score === 2.5) {
+                document.getElementById("match").value = "Match: 2 + Lucky Ball";
+                document.getElementById("payout").value = "Payout: $25";
+            }
+            else if ( score === 3 ) {
+                document.getElementById("match").value = "Match: 3";
+                document.getElementById("payout").value = "Payout: $20";
+            }
+            else if (score === 3.5 ) {
+                document.getElementById("match").value = "Match: 3 + Lucky Ball";
+                document.getElementById("payout").value = "Payout: $150";
+            }
+            else if (score === 4 ) {
+                document.getElementById("match").value = "Match: 4";
+                document.getElementById("payout").value = "Payout: $200";
+            }
+            else if (score === 4.5 ) {
+                document.getElementById("match").value = "Match: 4 + Lucky Ball";
+                document.getElementById("payout").value = "Payout: $5,000";
+            }
+            else if (score === 5) {
+                document.getElementById("match").value = "Match: 5";
+                document.getElementById("payout").value = "Payout: $25,000 a YEAR for LIFE!";
+            }
+            else if (score === 5.5 ) {
+                document.getElementById("match").value = "Match: 5 + Lucky Ball";
+                document.getElementById("payout").value = "Payout: $7,000 a WEEK for LIFE!";
+            }
+            else {
+                document.getElementById("match").value = "Sorry. You did not win a prize.";
+                document.getElementById("payout").value = " ";
+            }
+     
+        }
+    
+
+
+        
+    </script>
+  </head>
+  <body>
+    <form id="lottery">
+      <h1>Mass Lottery "Lucky for Life"</h1>
+
+      <fieldset>
+        <legend>1. Lottery Numbers</legend>
+        <legend>
+        <button type="button" class="num_button" onclick="display_num()">Get Numbers!</button>
+
+          <input class="num" id="unsort1" value="" disabled />
+          <input class="num" id="unsort2" value="" disabled />
+          <input class="num" id="unsort3" value="" disabled />
+          <input class="num" id="unsort4" value="" disabled />
+          <input class="num" id="unsort5" value="" disabled />
+          <input
+            class="num"
+            id="unsort6"
+            value=""
+            style="border-color: #00b300"
+            disabled
+          />
+        </legend>
+        <legend>
+        <button type="button" class="num_button" onClick="sort_num()">Sort Numbers!</button>
+
+          <input class="num" id="sort1" value="" disabled />
+          <input class="num" id="sort2" value="" disabled />
+          <input class="num" id="sort3" value="" disabled />
+          <input class="num" id="sort4" value="" disabled />
+          <input class="num" id="sort5" value="" disabled />
+          <input
+            class="num"
+            id="sort6"
+            value=""
+            style="border-color: #00b300"
+            disabled
+          />
+        </legend>
+      </fieldset>
+      <fieldset>
+        <legend>2. Pick Your Numbers</legend>
+        <input id="pick_five" class="pick_num" type="text" placeholder="Enter 5 numbers separated by spaces" />
+        <input id="pick_lucky" class="pick_num" type="text" placeholder="Enter lucky ball" />
+        <button class="pick_button" type="button" onclick="get_score()">Submit</button>
+      </fieldset>
+      <fieldset>
+        <legend>3. Payout!</legend>
+        <input type="text" class="payout" id="match" disabled></div>
+        <input type="text" class="probability" id="payout" disabled></div>
+        <input type="text" class="payout" id="payout" disabled></div>
+      </fieldset>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+.num {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 0.5%;
+  margin-bottom: 1%;
+  text-align: center;
+}
+.num_button {
+  border-color: #949494;
+  background-color: #155815;
+  color: #fff;
+}
+.pick_num {
+  width: 90%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+.pick_button {
+  margin-top: 1%;
+  border-color: #949494;
+  background-color: #155815;
+  color: #fff;
+}
+h1 {
+  text-align: center;
+}
