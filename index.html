@@ -35,22 +35,21 @@
             }
         }
         // purpose: calculates score of player
-        // PROBLEM: NOT WORKING ( not comparing it right? )
         function get_score() {
             var user_five = lottery.pick_five.value;
             var user_lucky = lottery.pick_lucky.value;
             var user_pick = user_five.split(" ").map(function(elem) {return parseInt(elem, 10);});
-            var score = 0;
-            for (i = 0; i < unsort.length - 1; i++ ) {
+        
+            var score = 0.0;
+            for (i = 0; i < unsort.length; i++ ) {
                 for (j = 0; j < user_pick.length; j++ ) {
                     if (user_pick[j] == unsort[i]){
                         score += 1;
                         break;
                     }
-
                 }
             }
-            if (user_lucky === lucky) {
+            if (user_lucky  == lucky) {
                 score += 0.5;
             }
             if (score === 0.5 ) {
@@ -101,10 +100,7 @@
             }
      
         }
-    
-
-
-        
+      
     </script>
   </head>
   <body>
@@ -150,12 +146,11 @@
         <legend>2. Pick Your Numbers</legend>
         <input id="pick_five" class="pick_num" type="text" placeholder="Enter 5 numbers separated by spaces" />
         <input id="pick_lucky" class="pick_num" type="text" placeholder="Enter lucky ball" />
-        <button class="pick_button" type="button" onclick="get_score()">Submit</button>
+        <button class="pick_button" type="button" onClick="get_score()">Submit</button>
       </fieldset>
       <fieldset>
         <legend>3. Payout!</legend>
         <input type="text" class="payout" id="match" disabled></div>
-        <input type="text" class="probability" id="payout" disabled></div>
         <input type="text" class="payout" id="payout" disabled></div>
       </fieldset>
     </form>
